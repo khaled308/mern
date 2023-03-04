@@ -7,7 +7,6 @@ exports.registerValidator = [
 
   check("email")
     .notEmpty()
-    .withMessage("Email is required")
     .isEmail()
     .withMessage("email not valid")
     .custom(async (val) => {

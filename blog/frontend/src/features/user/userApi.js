@@ -1,25 +1,30 @@
 import axios from "axios";
 
-export const registerService = async (data) => {
-  try {
-    const res = await axios.post(
-      "http://localhost:8000/api/auth/register",
-      data
-    );
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+const API_URL = "http://localhost:8000/api/auth/";
+
+export const registerService = async (user) => {
+  const res = await axios.post(`${API_URL}register`, user);
+  const data = res.data;
+
+  if (data) localStorage.setItem("token", "Bearer " + data.data.token);
+  return data;
 };
 
-export const loginService = async (data) => {
-  try {
-    const res = await axios.post("/api/auth/login", data);
-    const { data } = res;
+export const loginService = async (user) => {
+  const res = await axios.post(`${API_URL}login`, user);
+  const data = res.data;
 
-    localStorage.setItem("token", data?.token);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  if (data) localStorage.setItem("token", "Bearer " + data.data.token);
+  return data;
+};
+
+export const getUserService = async () => {
+  const res = await axios.get(`${API_URL}`, {
+    headers: {
+      authorization: localStorage.getItem("token"),
+    },
+  });
+  const data = res.data;
+
+  return data;
 };

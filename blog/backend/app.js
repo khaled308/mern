@@ -4,10 +4,13 @@ const cors = require("cors");
 const dbConnection = require("./db");
 const { userRoutes } = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
+const morgan = require("morgan");
 
 const app = express();
 
 dbConnection();
+
+app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
