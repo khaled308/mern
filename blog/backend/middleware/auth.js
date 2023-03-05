@@ -20,3 +20,12 @@ exports.verifyToken = expressAsyncHandler(async (req, res, next) => {
   );
   next();
 });
+
+exports.isAuthorized = expressAsyncHandler(async (req, res, next) => {
+  const id = req.body.user._id;
+  if (String(req.userId) != String(id)) {
+    const error = new AppError("You are not allowed", 403);
+    return next(error);
+  }
+  next();
+});

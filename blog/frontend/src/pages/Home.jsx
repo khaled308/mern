@@ -31,7 +31,11 @@ const Home = () => {
       <div className='flex flex-wrap gap-3'>
         {isLoading && <Loader />}
         {blogs.map((item) => (
-          <Card data={item} className='flex-1' />
+          <Card
+            data={item}
+            className='flex-1 cursor-pointer'
+            onClick={() => navigate(`/blogs/${item._id}`)}
+          />
         ))}
       </div>
     </>

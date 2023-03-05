@@ -3,13 +3,14 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsFillChatFill } from "react-icons/bs";
 import { FaShareSquare } from "react-icons/fa";
 
-const Card = ({ data, className }) => {
+const Card = ({ data, className, ...utils }) => {
   return (
     <div
       className={
         "bg-white rounded-lg shadow-md p-4 min-w-[200px] max-w-[500px] " +
         className
       }
+      {...utils}
     >
       <div className='border-b-2 mb-3 py-3'>
         <h2 className='text-xl font-bold mb-2'>{data.title}</h2>
@@ -39,9 +40,6 @@ const Card = ({ data, className }) => {
           </div>
         </div>
       </div>
-      <button className='bg-blue-500 text-white py-2 px-4 rounded mt-4'>
-        Edit
-      </button>
     </div>
   );
 };

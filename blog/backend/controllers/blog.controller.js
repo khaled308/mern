@@ -33,3 +33,46 @@ exports.get = expressAsyncHandler(async (req, res) => {
 
   res.status(200).send({ success: true, blogs, pagination });
 });
+
+exports.show = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const blog = await Blog.findById(id).populate({
+    path: "user",
+    select: "name",
+  });
+
+  if (!blog)
+    res.status(404).send({ success: false, errors: ["blog not Found"] });
+  res
+    .status(201)
+    .send({ success: true, message: "blog created successfully", blog });
+});
+
+exports.edit = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { title, description, content } = req.body;
+  const blog = await Blog.findByIdAndUpdate(
+    id,
+    { title, description, content },
+    { new: true }
+  );
+
+  res
+    .status(201)
+    .send({ success: true, message: "blog updated successfully", blog });
+});
+
+exports.del = expressAsyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const blog = await Blog.findById(id);
+
+  if (String(blog.user) != String(req.userId))
+    return res
+      .status(403)
+      .send({ success: false, errors: ["you are not allowed"] });
+
+  await blog.deleteOne();
+
+  res.status(200).send({ success: true, message: "blog deleted successfully" });
+});

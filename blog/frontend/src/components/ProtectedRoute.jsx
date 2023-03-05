@@ -14,7 +14,7 @@ const Layout = ({ user, children }) => {
     navigate("/login");
   };
   return (
-    <>
+    <div className='flex flex-col min-h-screen'>
       <header className='bg-primary flex justify-between items-center px-2 py-5'>
         <Link to='/'>
           <h1 className='text-2xl font-bold uppercase text-white'>Blog</h1>
@@ -25,8 +25,8 @@ const Layout = ({ user, children }) => {
           <AiOutlineLogout className='ml-5' onClick={handelLogout} />
         </div>
       </header>
-      <div className='mt-8 p-2'>{children}</div>
-    </>
+      <div className='mt-8 p-2 flex-1'>{children}</div>
+    </div>
   );
 };
 

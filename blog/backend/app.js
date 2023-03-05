@@ -19,5 +19,5 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", userRoutes);
 app.use("/api/blogs", blogRoutes);
 
-app.use(errorHandler);
+// app.use(errorHandler);
 app.listen(process.env.PORT || 8000);

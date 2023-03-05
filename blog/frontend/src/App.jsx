@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AddBlog, Home, Login, Register } from "./pages";
+import { AddBlog, EditBlog, Home, Login, Register, ShowBlog } from "./pages";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -28,8 +28,20 @@ function App() {
             }
           />
           <Route
-            path='/blog/{id}'
-            element={<ProtectedRoute></ProtectedRoute>}
+            path='/blogs/:id'
+            element={
+              <ProtectedRoute>
+                <ShowBlog />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/blogs/:id/edit'
+            element={
+              <ProtectedRoute>
+                <EditBlog />
+              </ProtectedRoute>
+            }
           />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
