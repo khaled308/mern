@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, Login, Register } from "./pages";
+import { AddBlog, Home, Login, Register } from "./pages";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -18,6 +18,18 @@ function App() {
                 <Home />
               </ProtectedRoute>
             }
+          />
+          <Route
+            path='/add-blog'
+            element={
+              <ProtectedRoute>
+                <AddBlog />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/blog/{id}'
+            element={<ProtectedRoute></ProtectedRoute>}
           />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

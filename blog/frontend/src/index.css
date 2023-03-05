@@ -6,6 +6,10 @@
   @apply my-4 w-full p-2 border border-gray-300 focus:outline-none focus:border-blue-500 rounded;
 }
 
+.btn {
+  @apply shadow text-white px-3 py-2 rounded;
+}
+
 .btn-form {
-  @apply bg-primary shadow text-white px-3 py-2 rounded w-full;
+  @apply bg-primary w-full btn;
 }

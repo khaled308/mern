@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const dbConnection = require("./db");
-const { userRoutes } = require("./routes");
+const { userRoutes, blogRoutes } = require("./routes");
 const errorHandler = require("./middleware/errorHandler");
 const morgan = require("morgan");
 
@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/api/auth", userRoutes);
+app.use("/api/blogs", blogRoutes);
 
 app.use(errorHandler);
 app.listen(process.env.PORT || 8000);
