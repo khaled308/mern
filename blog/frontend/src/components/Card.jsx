@@ -20,23 +20,23 @@ const Card = ({ data, className, ...utils }) => {
       <div className='flex items-center justify-between flex-wrap'>
         <div className='flex flex-col'>
           <h2>Posted on: {moment(data.createdAt).format("DD-MM-YYYY")}</h2>
-          <h2>Posted By: {data.user.name}</h2>
+          <h2>Posted By: {data.author.name}</h2>
         </div>
 
         <div className='flex gap-3'>
           <div className='flex gap-2 items-center'>
             <AiFillHeart />
-            {data.likesCount}
+            {data.likes?.length || 0}
           </div>
 
           <div className='flex gap-2 items-center'>
             <BsFillChatFill />
-            {data.commentsCount}
+            {data.comments?.length || 0}
           </div>
 
           <div className='flex gap-2 items-center'>
             <FaShareSquare />
-            {data.sharesCount}
+            {data.shares?.length || 0}
           </div>
         </div>
       </div>

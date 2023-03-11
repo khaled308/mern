@@ -8,7 +8,7 @@ exports.store = expressAsyncHandler(async (req, res) => {
     title,
     description,
     content,
-    user: req.userId,
+    author: req.userId,
   });
 
   res
@@ -23,7 +23,7 @@ exports.get = expressAsyncHandler(async (req, res) => {
   const blogs = await Blog.find()
     .skip(skip)
     .limit(limit)
-    .populate({ path: "user", select: "name" });
+    .populate({ path: "author", select: "name" });
 
   const pagination = {
     page,
@@ -38,7 +38,7 @@ exports.show = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
 
   const blog = await Blog.findById(id).populate({
-    path: "user",
+    path: "author",
     select: "name",
   });
 
@@ -67,7 +67,7 @@ exports.del = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;
   const blog = await Blog.findById(id);
 
-  if (String(blog.user) != String(req.userId))
+  if (String(blog.author) != String(req.userId))
     return res
       .status(403)
       .send({ success: false, errors: ["you are not allowed"] });

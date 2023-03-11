@@ -22,8 +22,8 @@ exports.verifyToken = expressAsyncHandler(async (req, res, next) => {
 });
 
 exports.isAuthorized = expressAsyncHandler(async (req, res, next) => {
-  const id = req.body.author._id;
-  if (String(req.userId) != String(id)) {
+  const { userId } = req.body;
+  if (String(req.userId) != String(userId)) {
     const error = new AppError("You are not allowed", 403);
     return next(error);
   }

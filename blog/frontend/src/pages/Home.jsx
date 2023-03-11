@@ -32,6 +32,7 @@ const Home = () => {
         {isLoading && <Loader />}
         {blogs.map((item) => (
           <Card
+            key={item._id}
             data={item}
             className='flex-1 cursor-pointer'
             onClick={() => navigate(`/blogs/${item._id}`)}

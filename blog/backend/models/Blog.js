@@ -16,23 +16,19 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    user: {
+    author: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    likesCount: {
-      type: Number,
-      default: 0,
-    },
-    commentsCount: {
-      type: Number,
-      default: 0,
-    },
-    sharesCount: {
-      type: Number,
-      default: 0,
-    },
+    likes: [{ user: { type: mongoose.Types.ObjectId } }],
+    comments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    Shares: [{ user: { type: mongoose.Types.ObjectId } }],
   },
   {
     timestamps: true,
